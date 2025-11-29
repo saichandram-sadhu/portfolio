@@ -47,17 +47,17 @@ function initNavigation() {
 }
 
 // Helper function for loading JSON
+// FIXED: Use absolute paths from root for Cloudflare Pages
 async function loadJSON(path) {
     try {
-        // Fix: Handle relative paths for Cloudflare Pages
+        // Ensure path is absolute from root (required for Cloudflare Pages)
         let fullPath = path;
         if (!path.startsWith('http') && !path.startsWith('/')) {
-            // Relative path - ensure it starts with ../
-            if (!path.startsWith('../')) {
-                fullPath = '../' + path;
-            } else {
-                fullPath = path;
-            }
+            // Convert relative to absolute
+            fullPath = '/' + path.replace(/^\.\.\//, '').replace(/^\.\//, '');
+        } else if (path.startsWith('../')) {
+            // Convert ../data/ to /data/
+            fullPath = '/' + path.replace(/^\.\.\//, '');
         }
         
         // Add cache busting for development
