@@ -254,6 +254,12 @@
                 async savePost() {
                     this.saving = true;
                     try {
+                        // Ensure generateId is available
+                        if (!window.generateId) {
+                            window.generateId = function() {
+                                return Date.now().toString(36) + Math.random().toString(36).substr(2);
+                            };
+                        }
                         const postData = { id: this.editingPost?.id || window.generateId(), ...this.form, slug: this.form.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') };
                         if (this.editingPost) {
                             const index = this.posts.findIndex(p => p.id === postData.id);
