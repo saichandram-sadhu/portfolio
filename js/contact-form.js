@@ -7,57 +7,28 @@ const EMAILJS_PUBLIC_KEY = 'q3bOp6vw17do7dwU4';
 
 // Wait for DOM to be ready
 function initContactForm() {
-    // Get UI elements
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const formMessage = document.getElementById('formMessage');
 
-    if (!contactForm) {
-        console.error('❌ Contact form not found');
-        return;
-    }
-
-    if (!submitBtn) {
-        console.error('❌ Submit button not found');
-        return;
-    }
-
-    if (!formMessage) {
-        console.error('❌ Form message element not found');
+    if (!contactForm || !submitBtn || !formMessage) {
+        console.error('❌ Contact form elements missing');
         return;
     }
 
     console.log('✅ Form elements found, attaching submit handler');
 
-    // Add click handler to button as backup (capture phase)
-    submitBtn.addEventListener('click', (e) => {
-        console.log('🔘 Submit button clicked');
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        return false;
-    }, true);
-
-    // Submit handler - MUST be first to catch event
     contactForm.addEventListener('submit', async (e) => {
         console.log('🚀 Form submit event triggered');
         e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
 
-        if (!validateForm()) {
-            console.log('❌ Form validation failed');
-            return;
-        }
+        if (!validateForm()) return;
 
-        // Check if EmailJS is available
         if (typeof emailjs === 'undefined') {
-            console.error('❌ EmailJS not available');
-            showFormMessage("❌ Email service not ready. Please refresh the page.", "error");
+            showFormMessage("❌ Email service not ready. Please refresh.", "error");
             return;
         }
 
-        console.log('✅ Starting EmailJS send...');
         submitBtn.disabled = true;
         submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
 
@@ -70,10 +41,8 @@ function initContactForm() {
         };
 
         try {
-            console.log('📧 Sending email via EmailJS...', formData);
             await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData);
 
-            console.log('✅ Email sent successfully!');
             showFormMessage("✅ Message sent successfully!", "success");
             contactForm.reset();
         } catch (err) {
@@ -84,8 +53,6 @@ function initContactForm() {
         submitBtn.disabled = false;
         submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
     });
-
-    console.log('✅ Submit handler attached successfully');
 }
 
 // Initialize when DOM is ready
