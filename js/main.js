@@ -150,8 +150,8 @@ function initSkillsProgress() {
     if (skillBars.length === 0) return;
     
     const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px'
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
     };
     
     const observer = new IntersectionObserver((entries) => {
@@ -160,7 +160,10 @@ function initSkillsProgress() {
                 const progressBar = entry.target;
                 const percent = progressBar.getAttribute('data-percent');
                 if (percent) {
+                    // Force reflow to ensure animation
+                    progressBar.offsetHeight;
                     progressBar.style.width = percent + '%';
+                    console.log('Animating skill bar to', percent + '%');
                 }
                 observer.unobserve(progressBar);
             }
@@ -168,8 +171,29 @@ function initSkillsProgress() {
     }, observerOptions);
     
     skillBars.forEach(bar => {
+        // Set initial width to 0
+        bar.style.width = '0%';
         observer.observe(bar);
     });
+    
+    // Also check if section is already visible on load
+    const skillsSection = document.querySelector('.skills-progress');
+    if (skillsSection) {
+        const rect = skillsSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible) {
+            // Section is already visible, trigger animation after a short delay
+            setTimeout(() => {
+                skillBars.forEach(bar => {
+                    const percent = bar.getAttribute('data-percent');
+                    if (percent) {
+                        bar.offsetHeight; // Force reflow
+                        bar.style.width = percent + '%';
+                    }
+                });
+            }, 300);
+        }
+    }
 }
 
 // Observe all fade-in elements
