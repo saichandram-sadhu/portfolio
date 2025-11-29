@@ -117,7 +117,7 @@ jobs:
     - name: Check data/seo.json exists
       run: |
         if [ ! -f data/seo.json ]; then
-          echo "⚠️  WARNING: data/seo.json not found (admin panel SEO editing may not work)"
+          echo "⚠️  WARNING: data/seo.json not found"
         else
           echo "✅ data/seo.json exists"
         fi
