@@ -3,6 +3,16 @@ node_modules/
 package-lock.json
 yarn.lock
 
+# Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
 # Build outputs
 dist/
 build/
