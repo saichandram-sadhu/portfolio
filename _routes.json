@@ -1,8 +1,7 @@
 {
   "version": 1,
   "include": [
-    "/admin",
-    "/admin/*"
+    "/*"
   ],
   "exclude": [
     "/assets/*",
@@ -10,21 +9,6 @@
     "/css/*",
     "/js/*",
     "/admin/js/*",
-    "/admin/css/*",
-    "/*.json",
-    "/*.xml",
-    "/*.txt",
-    "/*.ico",
-    "/*.png",
-    "/*.jpg",
-    "/*.jpeg",
-    "/*.svg",
-    "/*.webp",
-    "/*.mp4",
-    "/*.pdf",
-    "/*.woff",
-    "/*.woff2",
-    "/*.ttf",
-    "/*.eot"
+    "/admin/css/*"
   ]
 }
