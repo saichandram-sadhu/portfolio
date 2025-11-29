@@ -226,11 +226,14 @@
                 async loadPosts() {
                     try {
                         const data = await window.loadJSON('data/blog.json');
-                        this.posts = data || [];
+                        this.posts = Array.isArray(data) ? data : [];
                         this.filterPosts();
                     } catch (error) {
                         console.error('Error loading posts:', error);
-                        if (window.Toast) window.Toast.show('Failed to load posts', 'error');
+                        // Initialize with empty array if file doesn't exist
+                        this.posts = [];
+                        this.filterPosts();
+                        if (window.Toast) window.Toast.show('Blog file not found, starting with empty list', 'info');
                     }
                 },
                 filterPosts() {

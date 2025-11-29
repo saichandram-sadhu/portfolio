@@ -1,40 +1,8 @@
 /**
  * Utility Functions
+ * 
+ * Note: Toast is defined in components.js - do not redeclare here
  */
-
-// Toast is defined in components.js - avoid duplicate declaration
-if (!window.Toast) {
-    class Toast {
-        static show(message, type = 'success', duration = 3000) {
-            const toast = document.createElement('div');
-            toast.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 ${
-                type === 'success' ? 'bg-green-500 text-white' :
-                type === 'error' ? 'bg-red-500 text-white' :
-                type === 'warning' ? 'bg-yellow-500 text-white' :
-                'bg-blue-500 text-white'
-            }`;
-            toast.textContent = message;
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(100%)';
-            
-            document.body.appendChild(toast);
-            
-            // Animate in
-            setTimeout(() => {
-                toast.style.opacity = '1';
-                toast.style.transform = 'translateX(0)';
-            }, 10);
-            
-            // Animate out and remove
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(100%)';
-                setTimeout(() => toast.remove(), 300);
-            }, duration);
-        }
-    }
-    window.Toast = Toast;
-}
 
 /**
  * Image Upload Handler
@@ -157,12 +125,17 @@ async function loadJSON(filePath) {
     }
 }
 
-// Export to window (Toast already exported from components.js if loaded)
-if (!window.Toast) {
-    window.Toast = Toast;
-}
+// Export to window
+// Toast is exported from components.js - do not export here
 window.ImageUploader = ImageUploader;
 window.formatDate = formatDate;
 window.generateId = generateId;
 window.debounce = debounce;
 window.loadJSON = loadJSON;
+
+// Ensure generateId is always available (fallback if script loads out of order)
+if (!window.generateId) {
+    window.generateId = function() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    };
+}
