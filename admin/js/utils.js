@@ -125,19 +125,20 @@ async function loadJSON(filePath) {
     }
 }
 
+// Ensure generateId is available immediately (before other exports)
+// This prevents "generateId is not a function" errors
+if (typeof window !== 'undefined' && !window.generateId) {
+    window.generateId = function() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    };
+}
+
 // Export to window
 // Toast is exported from components.js - do not export here
 if (typeof window !== 'undefined') {
     window.ImageUploader = ImageUploader;
     window.formatDate = formatDate;
-    window.generateId = generateId;
+    window.generateId = generateId; // Use the full function
     window.debounce = debounce;
     window.loadJSON = loadJSON;
-
-    // Ensure generateId is always available (fallback if script loads out of order)
-    if (!window.generateId) {
-        window.generateId = function() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2);
-        };
-    }
 }
