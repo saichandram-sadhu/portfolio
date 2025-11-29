@@ -4,6 +4,17 @@
  * Note: Toast is defined in components.js - do not redeclare here
  */
 
+// 🔥 Restore missing generateId function
+// This is required for creating blog posts, projects, testimonials, etc.
+// Without this, the admin panel throws: "window.generateId is not a function"
+window.generateId = function () {
+    return 'id-' + Math.random().toString(36).substring(2, 10)
+        + '-' + Date.now().toString(36);
+};
+
+// Optional: toast safeguard to prevent duplicate declaration crashes
+if (!window.Toast) window.Toast = {};
+
 /**
  * Image Upload Handler
  * Supports both Cloudflare Images and base64 encoding
