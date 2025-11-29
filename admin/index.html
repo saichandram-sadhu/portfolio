@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=login.html">
     <script>
-        // Check if user is authenticated, redirect accordingly
-        const isAuthenticated = localStorage.getItem('admin_authenticated') === 'true';
-        if (isAuthenticated) {
-            window.location.replace('dashboard.html');
-        } else {
-            window.location.replace('login.html');
-        }
+        // Immediate redirect - check authentication first
+        (function() {
+            try {
+                const isAuthenticated = localStorage.getItem('admin_authenticated') === 'true';
+                if (isAuthenticated) {
+                    window.location.replace('dashboard.html');
+                } else {
+                    window.location.replace('login.html');
+                }
+            } catch (e) {
+                // Fallback if localStorage fails
+                window.location.replace('login.html');
+            }
+        })();
     </script>
 </head>
-<body>
-    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui;">
-        <p>Redirecting to admin panel...</p>
+<body style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #fff;">
+    <div style="text-align: center;">
+        <p style="margin: 0;">Redirecting to admin panel...</p>
+        <p style="margin-top: 1rem; font-size: 0.875rem; opacity: 0.7;">
+            <a href="login.html" style="color: #60a5fa; text-decoration: none;">Click here if not redirected</a>
+        </p>
     </div>
 </body>
 </html>
-

@@ -16,12 +16,18 @@
     "*.ico",
     "*.png",
     "*.jpg",
+    "*.jpeg",
     "*.svg",
+    "*.webp",
     "*.mp4",
-    "*.pdf"
+    "*.pdf",
+    "*.woff",
+    "*.woff2",
+    "*.ttf",
+    "*.eot"
   ],
   "middleware": [],
   "fallback": {
-    "spa": true
+    "spa": false
   }
 }
