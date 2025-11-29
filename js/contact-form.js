@@ -5,10 +5,85 @@ const EMAILJS_SERVICE_ID = 'service_vaj0t8q';
 const EMAILJS_TEMPLATE_ID = 'template_6vgmvzf';
 const EMAILJS_PUBLIC_KEY = 'q3bOp6vw17do7dwU4';
 
-// Get UI elements
-const contactForm = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
-const formMessage = document.getElementById('formMessage');
+// Wait for DOM to be ready
+function initContactForm() {
+    // Get UI elements
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+
+    if (!contactForm) {
+        console.error('❌ Contact form not found');
+        return;
+    }
+
+    if (!submitBtn) {
+        console.error('❌ Submit button not found');
+        return;
+    }
+
+    if (!formMessage) {
+        console.error('❌ Form message element not found');
+        return;
+    }
+
+    console.log('✅ Form elements found, attaching submit handler');
+
+    // Submit handler
+    contactForm.addEventListener('submit', async (e) => {
+        console.log('🚀 Form submit event triggered');
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!validateForm()) {
+            console.log('❌ Form validation failed');
+            return;
+        }
+
+        // Check if EmailJS is available
+        if (typeof emailjs === 'undefined') {
+            console.error('❌ EmailJS not available');
+            showFormMessage("❌ Email service not ready. Please refresh the page.", "error");
+            return;
+        }
+
+        console.log('✅ Starting EmailJS send...');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+        const formData = {
+            from_name: document.getElementById('name').value.trim(),
+            from_email: document.getElementById('email').value.trim(),
+            subject: document.getElementById('subject').value.trim(),
+            message: document.getElementById('message').value.trim(),
+            to_email: "saichandram.sadhu.it@gmail.com"
+        };
+
+        try {
+            console.log('📧 Sending email via EmailJS...', formData);
+            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData);
+
+            console.log('✅ Email sent successfully!');
+            showFormMessage("✅ Message sent successfully!", "success");
+            contactForm.reset();
+        } catch (err) {
+            console.error('❌ EmailJS Error:', err);
+            showFormMessage("❌ Failed to send message. Try again.", "error");
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+    });
+
+    console.log('✅ Submit handler attached successfully');
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+} else {
+    initContactForm();
+}
 
 // Initialize EmailJS when SDK is loaded
 function initEmailJS() {
@@ -61,49 +136,11 @@ function validateForm() {
 }
 
 function showFormMessage(message, type) {
-    formMessage.textContent = message;
-    formMessage.className = `form-message ${type}`;
-    formMessage.style.display = "block";
-    setTimeout(() => (formMessage.style.display = "none"), 5000);
-}
-
-// Submit handler
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        if (!validateForm()) return;
-
-        // Check if EmailJS is available
-        if (typeof emailjs === 'undefined') {
-            showFormMessage("❌ Email service not ready. Please refresh the page.", "error");
-            return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
-
-        const formData = {
-            from_name: document.getElementById('name').value.trim(),
-            from_email: document.getElementById('email').value.trim(),
-            subject: document.getElementById('subject').value.trim(),
-            message: document.getElementById('message').value.trim(),
-            to_email: "saichandram.sadhu.it@gmail.com"
-        };
-
-        try {
-            await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData);
-
-            showFormMessage("✅ Message sent successfully!", "success");
-            contactForm.reset();
-        } catch (err) {
-            console.error('EmailJS Error:', err);
-            showFormMessage("❌ Failed to send message. Try again.", "error");
-        }
-
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
-    });
-} else {
-    console.error('❌ Contact form not found');
+    const formMessage = document.getElementById('formMessage');
+    if (formMessage) {
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type}`;
+        formMessage.style.display = "block";
+        setTimeout(() => (formMessage.style.display = "none"), 5000);
+    }
 }
