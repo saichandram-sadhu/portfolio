@@ -4,19 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Redirecting...</title>
-    <meta http-equiv="refresh" content="0; url=login.html">
     <script>
-        // Immediate redirect - works even if meta refresh fails
+        // Immediate redirect - prevent loops by checking current path
         (function() {
             try {
+                const currentPath = window.location.pathname;
+                // If already on login page, don't redirect
+                if (currentPath.includes('/login') || currentPath.endsWith('/admin/login')) {
+                    return;
+                }
+                
                 const isAuthenticated = localStorage.getItem('admin_authenticated') === 'true';
                 const target = isAuthenticated ? 'dashboard.html' : 'login.html';
-                window.location.replace(target);
+                
+                // Use absolute path to prevent redirect loops
+                if (target.startsWith('/')) {
+                    window.location.replace(target);
+                } else {
+                    // Relative path - ensure we're in /admin/ directory
+                    const basePath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
+                    window.location.replace(basePath + target);
+                }
             } catch (e) {
-                window.location.replace('login.html');
+                // Fallback: redirect to login
+                const currentPath = window.location.pathname;
+                const basePath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
+                window.location.replace(basePath + 'login.html');
             }
         })();
     </script>
+    <meta http-equiv="refresh" content="1; url=login.html">
 </head>
 <body style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #fff;">
     <div style="text-align: center;">

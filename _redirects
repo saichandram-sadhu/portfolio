@@ -1,4 +1,5 @@
 # Admin routing - rewrite /admin/* to /admin/*.html
+# Note: Use 200 status to keep URL clean (no redirect)
 /admin      /admin/index.html        200
 /admin/     /admin/index.html        200
 /admin/blog        /admin/blog.html        200
@@ -10,4 +11,5 @@
 /admin/profile     /admin/profile.html     200
 /admin/skills      /admin/skills.html      200
 /admin/login       /admin/login.html       200
+/admin/login.html  /admin/login.html       200
 
