@@ -29,10 +29,6 @@ function initContactForm() {
 
     console.log('✅ Form elements found, attaching submit handler');
 
-    // Prevent any default form submission
-    contactForm.setAttribute('action', '#');
-    contactForm.setAttribute('method', 'post');
-    
     // Add click handler to button as backup (capture phase)
     submitBtn.addEventListener('click', (e) => {
         console.log('🔘 Submit button clicked');
