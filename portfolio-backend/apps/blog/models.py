@@ -25,7 +25,14 @@ class BlogPost(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            # Auto-generate ID if not provided
+            import uuid
+            self.id = f"blog-{uuid.uuid4().hex[:8]}"
         if not self.slug:
             self.slug = slugify(self.title)
+        if not self.date:
+            from django.utils import timezone
+            self.date = timezone.now().date()
         super().save(*args, **kwargs)
 

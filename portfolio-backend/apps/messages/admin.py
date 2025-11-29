@@ -7,7 +7,8 @@ class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'subject', 'read', 'created_at']
     list_filter = ['read', 'created_at']
     search_fields = ['name', 'email', 'subject', 'message']
-    readonly_fields = ['created_at']
+    readonly_fields = ['id', 'created_at']  # ID is auto-generated, make it read-only
+    fields = ['id', 'name', 'email', 'subject', 'message', 'read', 'created_at']
     actions = ['mark_as_read', 'mark_as_unread']
 
     def mark_as_read(self, request, queryset):

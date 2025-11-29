@@ -9,4 +9,6 @@ class BlogPostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'excerpt', 'content']
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'date'
+    fields = ['id', 'title', 'slug', 'category', 'excerpt', 'content', 'date', 'read_time', 'status']
+    readonly_fields = ['id']  # ID is auto-generated, make it read-only
 
