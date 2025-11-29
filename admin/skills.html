@@ -129,7 +129,7 @@
                 async init() { if (window.initNavigation) window.initNavigation(); await this.loadSkills(); },
                 async loadSkills() {
                     try {
-                        const data = await window.loadJSON('data/skills.json');
+                        const data = await window.loadJSON('../data/skills.json');
                         this.skills = data || [];
                     } catch (error) {
                         console.error('Error loading skills:', error);
@@ -150,7 +150,7 @@
                             const index = this.skills.findIndex(s => s.id === skillData.id);
                             if (index !== -1) this.skills[index] = skillData;
                         } else { this.skills.push(skillData); }
-                        await window.GitHubAPI.saveFile('data/skills.json', this.skills, `${this.editingSkill ? 'Update' : 'Add'} skill`);
+                        await window.GitHubAPI.saveFile('../data/skills.json', this.skills, `${this.editingSkill ? 'Update' : 'Add'} skill`);
                         if (window.Toast) window.Toast.show('Skill saved successfully', 'success');
                         this.closeEditor();
                     } catch (error) {
@@ -161,7 +161,7 @@
                     if (!confirm('Are you sure you want to delete this skill?')) return;
                     try {
                         this.skills = this.skills.filter(s => s.id !== id);
-                        await window.GitHubAPI.saveFile('data/skills.json', this.skills, 'Delete skill');
+                        await window.GitHubAPI.saveFile('../data/skills.json', this.skills, 'Delete skill');
                         if (window.Toast) window.Toast.show('Skill deleted successfully', 'success');
                     } catch (error) {
                         if (window.Toast) window.Toast.show('Failed to delete skill', 'error');

@@ -120,7 +120,7 @@
                 async init() { if (window.initNavigation) window.initNavigation(); await this.loadProfile(); },
                 async loadProfile() {
                     try {
-                        const data = await window.loadJSON('data/profile.json');
+                        const data = await window.loadJSON('../data/profile.json');
                         if (data) {
                             this.form = {
                                 name: data.name || '', title: data.title || '', about: data.about || '',
@@ -136,7 +136,7 @@
                 async saveProfile() {
                     this.saving = true;
                     try {
-                        await window.GitHubAPI.saveFile('data/profile.json', this.form, 'Update profile');
+                        await window.GitHubAPI.saveFile('../data/profile.json', this.form, 'Update profile');
                         if (window.Toast) window.Toast.show('Profile saved successfully', 'success');
                     } catch (error) {
                         console.error('Error saving profile:', error);

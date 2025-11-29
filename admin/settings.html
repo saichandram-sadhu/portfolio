@@ -141,7 +141,7 @@
                 async init() { if (window.initNavigation) window.initNavigation(); await this.loadSEO(); },
                 async loadSEO() {
                     try {
-                        const data = await window.loadJSON('data/seo.json');
+                        const data = await window.loadJSON('../data/seo.json');
                         if (data) {
                             this.form = {
                                 title: data.title || '', description: data.description || '', keywords: data.keywords || '',
@@ -158,7 +158,7 @@
                 async saveSEO() {
                     this.saving = true;
                     try {
-                        await window.GitHubAPI.saveFile('data/seo.json', this.form, 'Update SEO settings');
+                        await window.GitHubAPI.saveFile('../data/seo.json', this.form, 'Update SEO settings');
                         if (window.Toast) window.Toast.show('SEO settings saved successfully', 'success');
                     } catch (error) {
                         console.error('Error saving SEO settings:', error);

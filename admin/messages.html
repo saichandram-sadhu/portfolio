@@ -148,7 +148,7 @@
                 async init() { if (window.initNavigation) window.initNavigation(); await this.loadMessages(); },
                 async loadMessages() {
                     try {
-                        const data = await window.loadJSON('data/messages.json');
+                        const data = await window.loadJSON('../data/messages.json');
                         this.messages = (data || []).sort((a, b) => new Date(b.date) - new Date(a.date));
                         this.filterMessages();
                     } catch (error) {
@@ -172,7 +172,7 @@
                     if (!confirm('Are you sure you want to delete this message?')) return;
                     try {
                         this.messages = this.messages.filter(m => m.id !== id);
-                        await window.GitHubAPI.saveFile('data/messages.json', this.messages, 'Delete message');
+                        await window.GitHubAPI.saveFile('../data/messages.json', this.messages, 'Delete message');
                         if (window.Toast) window.Toast.show('Message deleted successfully', 'success');
                         this.filterMessages();
                     } catch (error) {
