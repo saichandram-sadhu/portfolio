@@ -11,12 +11,12 @@ console.log('✅ contact-form.js loaded successfully');
 // Initialize EmailJS
 // Replace these with your EmailJS credentials
 // Get them from: https://www.emailjs.com/
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID = 'service_vaj0t8q';
+const EMAILJS_TEMPLATE_ID = 'template_6vgmvzf';
+const EMAILJS_PUBLIC_KEY = 'q3bOp6vw17do7dwU4';
 
 // Initialize EmailJS (only if credentials are set)
-if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
+if (EMAILJS_PUBLIC_KEY !== 'q3bOp6vw17do7dwU4' && typeof emailjs !== 'undefined') {
     emailjs.init(EMAILJS_PUBLIC_KEY);
 }
 

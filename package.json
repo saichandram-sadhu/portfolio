@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-favicon-generator",
+  "version": "1.0.0",
+  "description": "Generate favicon files from SVG",
+  "scripts": {
+    "generate-favicons": "node generate-favicons.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {}
+}
+
