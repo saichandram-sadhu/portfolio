@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=login.html">
-    <title>Redirecting to Admin Login...</title>
+    <title>Admin Panel - Redirecting...</title>
     <script>
-        // Immediate redirect
-        window.location.replace('login.html');
+        // Check if user is authenticated, redirect accordingly
+        const isAuthenticated = localStorage.getItem('admin_authenticated') === 'true';
+        if (isAuthenticated) {
+            window.location.replace('dashboard.html');
+        } else {
+            window.location.replace('login.html');
+        }
     </script>
 </head>
 <body>
-    <p>Redirecting to <a href="login.html">login page</a>...</p>
+    <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui;">
+        <p>Redirecting to admin panel...</p>
+    </div>
 </body>
 </html>
 

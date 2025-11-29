@@ -1,6 +1,27 @@
 {
   "version": 1,
-  "include": ["/*"],
-  "exclude": []
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/assets/*",
+    "/data/*",
+    "/css/*",
+    "/js/*",
+    "/admin/js/*",
+    "/admin/css/*",
+    "*.json",
+    "*.xml",
+    "*.txt",
+    "*.ico",
+    "*.png",
+    "*.jpg",
+    "*.svg",
+    "*.mp4",
+    "*.pdf"
+  ],
+  "middleware": [],
+  "fallback": {
+    "spa": true
+  }
 }
-
