@@ -47,13 +47,37 @@ function initNavigation() {
 }
 
 // Helper function for loading JSON
+// FIXED: Use absolute paths from root for Cloudflare Pages
 async function loadJSON(path) {
     try {
-        const response = await fetch(path);
-        if (!response.ok) throw new Error('Failed to load');
+        // Ensure path is absolute from root (required for Cloudflare Pages)
+        let fullPath = path;
+        if (!path.startsWith('http') && !path.startsWith('/')) {
+            // Convert relative to absolute
+            fullPath = '/' + path.replace(/^\.\.\//, '').replace(/^\.\//, '');
+        } else if (path.startsWith('../')) {
+            // Convert ../data/ to /data/
+            fullPath = '/' + path.replace(/^\.\.\//, '');
+        }
+        
+        // Add cache busting for development
+        const url = fullPath + (fullPath.includes('?') ? '&' : '?') + 'v=' + Date.now();
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            // If 404, return empty array for blog.json or null for others
+            if (response.status === 404 && path.includes('blog.json')) {
+                return [];
+            }
+            throw new Error('Failed to load');
+        }
         return await response.json();
     } catch (error) {
         console.error(`Error loading ${path}:`, error);
+        // Return empty array for blog.json, null for others
+        if (path.includes('blog.json')) {
+            return [];
+        }
         return null;
     }
 }

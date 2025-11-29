@@ -1,0 +1,13 @@
+# Admin routing - rewrite /admin/* to /admin/*.html
+/admin      /admin/index.html        200
+/admin/     /admin/index.html        200
+/admin/blog        /admin/blog.html        200
+/admin/projects    /admin/projects.html    200
+/admin/messages    /admin/messages.html    200
+/admin/settings    /admin/settings.html    200
+/admin/testimonials /admin/testimonials.html 200
+/admin/dashboard   /admin/dashboard.html   200
+/admin/profile     /admin/profile.html     200
+/admin/skills      /admin/skills.html      200
+/admin/login       /admin/login.html       200
+

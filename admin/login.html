@@ -6,15 +6,15 @@
     <title>Admin Login - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="/admin/css/admin.css">
     <style>
         [x-cloak] { display: none !important; }
         body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
-    <script src="js/components.js"></script>
-    <script src="js/utils.js"></script>
+    <script src="/admin/js/components.js"></script>
+    <script src="/admin/js/utils.js"></script>
     
     <div x-data="loginForm()" x-cloak class="w-full max-w-md">
         <div class="glass rounded-2xl shadow-2xl p-8 backdrop-blur-xl">
@@ -135,8 +135,8 @@
         </div>
     </div>
 
-    <script src="js/auth.js"></script>
-    <script src="js/github-api.js"></script>
+    <script src="/admin/js/auth.js"></script>
+    <script src="/admin/js/github-api.js"></script>
     <script>
         function loginForm() {
             return {
