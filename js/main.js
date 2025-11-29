@@ -7,7 +7,14 @@ console.log('✅ main.js loaded successfully');
 
 // Check for common issues
 window.addEventListener('error', (e) => {
-    console.error('❌ Script Error:', e.filename, e.message, e.lineno);
+    // Ignore image load errors (404s) - they're handled gracefully with fallbacks
+    if (e.target && (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO')) {
+        return;
+    }
+    // Only log actual script errors
+    if (e.filename && e.message && !e.message.includes('Failed to load')) {
+        console.error('❌ Script Error:', e.filename, e.message, e.lineno);
+    }
 });
 
 // ============================================
@@ -189,7 +196,14 @@ buttons.forEach(button => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        
+        // Skip if href is just '#' or empty
+        if (!href || href === '#' || href === '#!') {
+            return;
+        }
+        
+        const target = document.querySelector(href);
         
         if (target) {
             const offsetTop = target.offsetTop - 80;

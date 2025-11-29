@@ -83,7 +83,7 @@ class PortfolioDataLoader {
                     </div>
                     <h3 class="blog-title">${post.title || 'Untitled'}</h3>
                     <p class="blog-excerpt">${post.excerpt || ''}</p>
-                    <a href="#" class="blog-link" data-slug="${post.slug || ''}">
+                    <a href="#blog" class="blog-link" data-slug="${post.slug || ''}">
                         Read More <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -102,9 +102,10 @@ class PortfolioDataLoader {
             <div class="project-card fade-in">
                 <div class="project-image">
                     ${project.image ? 
-                        `<img src="${project.image}" alt="${project.title}" class="project-img" loading="lazy">` :
-                        `<div class="project-placeholder"><i class="fas fa-project-diagram"></i></div>`
+                        `<img src="${project.image}" alt="${project.title}" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` :
+                        ''
                     }
+                    <div class="project-placeholder" style="display: ${project.image ? 'none' : 'flex'}"><i class="fas fa-project-diagram"></i></div>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">${project.title || 'Untitled'}</h3>
@@ -134,9 +135,10 @@ class PortfolioDataLoader {
                     <div class="testimonial-author">
                         <div class="author-avatar">
                             ${testimonial.photo ? 
-                                `<img src="${testimonial.photo}" alt="${testimonial.name}" loading="lazy">` :
-                                `<i class="fas fa-user"></i>`
+                                `<img src="${testimonial.photo}" alt="${testimonial.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` :
+                                ''
                             }
+                            <div style="display: ${testimonial.photo ? 'none' : 'flex'}"><i class="fas fa-user"></i></div>
                         </div>
                         <div class="author-info">
                             <h4 class="author-name">${testimonial.name || ''}</h4>
