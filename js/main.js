@@ -1,10 +1,26 @@
 // ============================================
+// ERROR HANDLING & DEBUG
+// ============================================
+
+// Log script loading
+console.log('✅ main.js loaded successfully');
+
+// Check for common issues
+window.addEventListener('error', (e) => {
+    console.error('❌ Script Error:', e.filename, e.message, e.lineno);
+});
+
+// ============================================
 // DARK MODE TOGGLE
 // ============================================
 
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = document.getElementById('themeIcon');
 const html = document.documentElement;
+
+if (!themeToggle || !themeIcon) {
+    console.warn('⚠️ Theme toggle elements not found');
+}
 
 // Check for saved theme preference or default to light mode
 const currentTheme = localStorage.getItem('theme') || 'light';

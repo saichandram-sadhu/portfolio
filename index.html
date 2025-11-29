@@ -1013,9 +1013,20 @@
         gtag('config', 'G-XXXXXXXXXX'); // Replace with your Google Analytics ID
     </script>
     
-    <script src="js/main.js"></script>
-    <script src="js/contact-form.js"></script>
-    <script src="js/blog-newsletter.js"></script>
+    <!-- Main JavaScript Files -->
+    <script src="js/main.js" defer></script>
+    <script src="js/contact-form.js" defer></script>
+    <script src="js/blog-newsletter.js" defer></script>
+    
+    <!-- Script Loading Verification -->
+    <script>
+        // Verify all scripts loaded
+        window.addEventListener('load', () => {
+            console.log('✅ All scripts loaded');
+            console.log('✅ Three.js:', typeof THREE !== 'undefined' ? 'Loaded' : 'Not loaded');
+            console.log('✅ EmailJS:', typeof emailjs !== 'undefined' ? 'Loaded' : 'Not loaded');
+        });
+    </script>
 </body>
 </html>
 
