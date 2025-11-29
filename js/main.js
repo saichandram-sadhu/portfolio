@@ -143,59 +143,14 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Initialize Skills Progress Bars
+// Initialize Skills Progress Bars - Simple CSS animation approach
 function initSkillsProgress() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    if (skillBars.length === 0) return;
-    
-    const observerOptions = {
-        threshold: 0.3,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const progressBar = entry.target;
-                const percent = progressBar.getAttribute('data-percent');
-                if (percent) {
-                    // Force reflow to ensure animation
-                    progressBar.offsetHeight;
-                    progressBar.style.width = percent + '%';
-                    console.log('Animating skill bar to', percent + '%');
-                }
-                observer.unobserve(progressBar);
-            }
-        });
-    }, observerOptions);
-    
-    skillBars.forEach(bar => {
-        // Set initial width to 0
-        bar.style.width = '0%';
-        observer.observe(bar);
-    });
-    
-    // Also check if section is already visible on load
-    setTimeout(() => {
-        const skillsSection = document.querySelector('.skills-progress');
-        if (skillsSection) {
-            const rect = skillsSection.getBoundingClientRect();
-            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-            if (isVisible) {
-                console.log('Skills section already visible, animating now');
-                skillBars.forEach(bar => {
-                    const percent = bar.getAttribute('data-percent');
-                    if (percent) {
-                        setTimeout(() => {
-                            bar.style.width = percent + '%';
-                            console.log('Set width to', percent + '%');
-                        }, 100);
-                    }
-                });
-            }
-        }
-    }, 500);
+    // Progress bars now use CSS animations directly via inline styles
+    // No JavaScript needed - CSS handles the animation
+    const progressBars = document.querySelectorAll('.progress-fill');
+    if (progressBars.length > 0) {
+        console.log('✅ Skills progress bars initialized:', progressBars.length);
+    }
 }
 
 // Observe all fade-in elements

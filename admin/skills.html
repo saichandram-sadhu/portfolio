@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>[x-cloak] { display: none !important; }</style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen" x-data="skillsManager()" x-cloak>
+    <div class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg z-40">
+        <div class="h-full flex flex-col">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Admin Panel</h1>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Portfolio Management</p>
+            </div>
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-chart-line w-5 mr-3"></i>Dashboard</a>
+                <a href="blog.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-blog w-5 mr-3"></i>Blog Posts</a>
+                <a href="projects.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-project-diagram w-5 mr-3"></i>Projects</a>
+                <a href="testimonials.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-quote-left w-5 mr-3"></i>Testimonials</a>
+                <a href="skills.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/20 rounded-lg"><i class="fas fa-code w-5 mr-3"></i>Skills</a>
+                <a href="messages.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-envelope w-5 mr-3"></i>Messages</a>
+                <a href="profile.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-user w-5 mr-3"></i>Profile</a>
+                <a href="settings.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-cog w-5 mr-3"></i>SEO Settings</a>
+            </nav>
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <button id="logoutBtn" class="w-full flex items-center px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"><i class="fas fa-sign-out-alt w-5 mr-3"></i>Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ml-64">
+        <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+            <div class="px-6 py-4 flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Skills</h2>
+                <div class="flex items-center gap-4">
+                    <button id="themeToggle" class="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i></button>
+                    <button @click="openEditor()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"><i class="fas fa-plus mr-2"></i>New Skill</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="p-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+                <div class="p-6 space-y-4">
+                    <template x-for="skill in skills" :key="skill.id">
+                        <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-4 flex-1">
+                                    <span class="font-medium text-gray-900 dark:text-white" x-text="skill.name"></span>
+                                    <span class="text-sm text-gray-600 dark:text-gray-400" x-text="skill.percent + '%'"></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button @click="editSkill(skill)" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"><i class="fas fa-edit"></i></button>
+                                    <button @click="deleteSkill(skill.id)" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full transition-all duration-500" :style="`width: ${skill.percent}%`"></div>
+                            </div>
+                        </div>
+                    </template>
+                    <div x-show="skills.length === 0" class="text-center py-12 text-gray-500 dark:text-gray-400">No skills found</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Editor Modal -->
+    <div x-show="showEditor" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4" @click.self="closeEditor()">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white" x-text="editingSkill ? 'Edit Skill' : 'New Skill'"></h3>
+            </div>
+            <form @submit.prevent="saveSkill()" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Skill Name *</label>
+                    <input x-model="form.name" type="text" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Percentage *</label>
+                    <input x-model.number="form.percent" type="number" min="0" max="100" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">
+                    <div class="mt-2">
+                        <input type="range" x-model.number="form.percent" min="0" max="100" class="w-full">
+                    </div>
+                </div>
+                <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <button type="button" @click="closeEditor()" class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">Cancel</button>
+                    <button type="submit" :disabled="saving" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg disabled:opacity-50">
+                        <span x-show="!saving">Save</span>
+                        <span x-show="saving">Saving...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/github-api.js"></script>
+    <script src="js/admin-layout.js"></script>
+    <script>
+        function skillsManager() {
+            return {
+                skills: [],
+                showEditor: false,
+                editingSkill: null,
+                saving: false,
+                form: { name: '', percent: 0 },
+
+                async init() {
+                    await this.loadSkills();
+                },
+
+                async loadSkills() {
+                    try {
+                        const data = await window.loadJSON('/data/skills.json');
+                        this.skills = data || [];
+                    } catch (error) {
+                        console.error('Error loading skills:', error);
+                        window.Toast.show('Failed to load skills', 'error');
+                    }
+                },
+
+                openEditor(skill = null) {
+                    this.editingSkill = skill;
+                    this.form = skill ? { ...skill } : { name: '', percent: 0 };
+                    this.showEditor = true;
+                },
+
+                closeEditor() {
+                    this.showEditor = false;
+                    this.editingSkill = null;
+                },
+
+                async saveSkill() {
+                    this.saving = true;
+                    try {
+                        const skillData = {
+                            id: this.editingSkill?.id || window.generateId(),
+                            name: this.form.name,
+                            percent: Math.min(100, Math.max(0, this.form.percent))
+                        };
+                        if (this.editingSkill) {
+                            const index = this.skills.findIndex(s => s.id === skillData.id);
+                            if (index !== -1) this.skills[index] = skillData;
+                        } else {
+                            this.skills.push(skillData);
+                        }
+                        await window.GitHubAPI.saveFile('data/skills.json', this.skills, `${this.editingSkill ? 'Update' : 'Add'} skill`);
+                        window.Toast.show('Skill saved successfully', 'success');
+                        this.closeEditor();
+                    } catch (error) {
+                        window.Toast.show('Failed to save skill', 'error');
+                    } finally {
+                        this.saving = false;
+                    }
+                },
+
+                async deleteSkill(id) {
+                    if (!confirm('Are you sure you want to delete this skill?')) return;
+                    try {
+                        this.skills = this.skills.filter(s => s.id !== id);
+                        await window.GitHubAPI.saveFile('data/skills.json', this.skills, 'Delete skill');
+                        window.Toast.show('Skill deleted successfully', 'success');
+                    } catch (error) {
+                        window.Toast.show('Failed to delete skill', 'error');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
