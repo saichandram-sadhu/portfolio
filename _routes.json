@@ -1,7 +1,8 @@
 {
   "version": 1,
   "include": [
-    "/*"
+    "/admin",
+    "/admin/*"
   ],
   "exclude": [
     "/assets/*",
@@ -25,9 +26,5 @@
     "*.woff2",
     "*.ttf",
     "*.eot"
-  ],
-  "middleware": [],
-  "fallback": {
-    "spa": false
-  }
+  ]
 }
