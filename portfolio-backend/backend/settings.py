@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'apps.projects',
     'apps.testimonials',
     'apps.skills',
-    'apps.messages',
+    'apps.messages.apps.MessagesConfig',  # Use explicit config to avoid conflict
     'apps.profile',
     'apps.seo',
 ]
@@ -39,6 +39,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -65,14 +66,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
-# Use DATABASE_URL if available (Render provides this), otherwise use individual PG vars
+# Use DATABASE_URL if available (Render provides this), otherwise use SQLite for local dev
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
     DATABASES = {
         'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
     }
-else:
-    # Fallback to individual environment variables
+elif os.getenv('PGHOST'):  # If PG vars are set, use PostgreSQL
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -81,6 +81,14 @@ else:
             'PASSWORD': os.getenv('PGPASSWORD', ''),
             'HOST': os.getenv('PGHOST', 'localhost'),
             'PORT': os.getenv('PGPORT', '5432'),
+        }
+    }
+else:
+    # Default to SQLite for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
