@@ -3,7 +3,9 @@
  */
 
 // Toast Notification System
-class Toast {
+// Prevent duplicate declaration
+if (typeof window !== 'undefined' && !window.Toast) {
+    class Toast {
     static show(message, type = 'success', duration = 3000) {
         const toast = document.createElement('div');
         const icons = {
@@ -39,6 +41,20 @@ class Toast {
             setTimeout(() => toast.remove(), 300);
         }, duration);
     }
+    window.Toast = Toast;
+}
+// If Toast already exists, use it
+if (typeof window !== 'undefined' && !window.Toast) {
+    // Fallback Toast if components.js loads after utils.js
+    window.Toast = {
+        show: function(message, type = 'success', duration = 3000) {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 flex items-center gap-3 px-6 py-4 bg-${type === 'success' ? 'green' : type === 'error' ? 'red' : 'blue'}-500 text-white rounded-xl shadow-2xl`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), duration);
+        }
+    };
 }
 
 // Modal Component
