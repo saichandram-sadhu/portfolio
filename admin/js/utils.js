@@ -2,37 +2,38 @@
  * Utility Functions
  */
 
-/**
- * Toast Notification System
- */
-class Toast {
-    static show(message, type = 'success', duration = 3000) {
-        const toast = document.createElement('div');
-        toast.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 ${
-            type === 'success' ? 'bg-green-500 text-white' :
-            type === 'error' ? 'bg-red-500 text-white' :
-            type === 'warning' ? 'bg-yellow-500 text-white' :
-            'bg-blue-500 text-white'
-        }`;
-        toast.textContent = message;
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-        
-        document.body.appendChild(toast);
-        
-        // Animate in
-        setTimeout(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(0)';
-        }, 10);
-        
-        // Animate out and remove
-        setTimeout(() => {
+// Toast is defined in components.js - avoid duplicate declaration
+if (!window.Toast) {
+    class Toast {
+        static show(message, type = 'success', duration = 3000) {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg transform transition-all duration-300 ${
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
+                type === 'warning' ? 'bg-yellow-500 text-white' :
+                'bg-blue-500 text-white'
+            }`;
+            toast.textContent = message;
             toast.style.opacity = '0';
             toast.style.transform = 'translateX(100%)';
-            setTimeout(() => toast.remove(), 300);
-        }, duration);
+            
+            document.body.appendChild(toast);
+            
+            // Animate in
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(0)';
+            }, 10);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
     }
+    window.Toast = Toast;
 }
 
 /**
@@ -156,8 +157,10 @@ async function loadJSON(filePath) {
     }
 }
 
-// Export to window
-window.Toast = Toast;
+// Export to window (Toast already exported from components.js if loaded)
+if (!window.Toast) {
+    window.Toast = Toast;
+}
 window.ImageUploader = ImageUploader;
 window.formatDate = formatDate;
 window.generateId = generateId;
