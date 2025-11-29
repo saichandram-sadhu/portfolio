@@ -34,12 +34,12 @@
 ### Step 1: Update Domain URLs
 
 **In `index.html`:**
-- Replace all instances of `https://saichandram-sadhu.netlify.app` with your actual domain
+- Replace all instances of `https://saichandram-sadhu.pages.dev` with your actual domain
 - Update Open Graph image URL
 - Update canonical URL
 
 **In `sitemap.xml`:**
-- Replace `https://saichandram-sadhu.netlify.app` with your actual domain
+- Replace `https://saichandram-sadhu.pages.dev` with your actual domain
 - Update `lastmod` date
 
 **In `robots.txt`:**
