@@ -6,19 +6,6 @@
     <title>404 - Page Not Found | Saichandram Sadhu</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <script>
-        // Handle admin routes
-        const path = window.location.pathname;
-        if (path.startsWith('/admin')) {
-            // Redirect /admin to /admin/login.html
-            if (path === '/admin' || path === '/admin/') {
-                window.location.replace('/admin/login.html');
-            } else {
-                // Try to find the file or redirect to login
-                window.location.replace('/admin/login.html');
-            }
-        }
-    </script>
 </head>
 <body>
     <div class="container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
