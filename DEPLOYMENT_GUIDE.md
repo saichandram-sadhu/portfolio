@@ -28,7 +28,7 @@
      - `EMAILJS_PUBLIC_KEY`
      - `GOOGLE_ANALYTICS_ID`
 
-**Your site will be live at:** `https://saichandram-sadhu.netlify.app`
+**Your site will be live at:** `https://saichandram-sadhu.pages.dev`
 
 ---
 
@@ -135,7 +135,7 @@ These are automatically applied when deployed.
 
 ## 📝 Pre-Deployment Checklist
 
-- [ ] Update all URLs in `index.html` (replace `saichandram-sadhu.netlify.app` with your actual domain)
+- [ ] Update all URLs in `index.html` (replace `saichandram-sadhu.pages.dev` with your actual domain)
 - [ ] Update `sitemap.xml` with your actual domain
 - [ ] Set up EmailJS and update credentials
 - [ ] Set up Google Analytics and update ID

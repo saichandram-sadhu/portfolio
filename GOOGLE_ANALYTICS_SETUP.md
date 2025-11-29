@@ -40,7 +40,7 @@
 
 1. You'll see "Web" as a data stream
 2. Click on it or add a new stream
-3. Enter your website URL: `https://saichandram-sadhu.netlify.app`
+3. Enter your website URL: `https://saichandram-sadhu.pages.dev`
 4. Stream name: "Portfolio Website"
 5. Click "Create stream"
 6. Copy your **Measurement ID** (format: `G-XXXXXXXXXX`)
