@@ -177,23 +177,25 @@ function initSkillsProgress() {
     });
     
     // Also check if section is already visible on load
-    const skillsSection = document.querySelector('.skills-progress');
-    if (skillsSection) {
-        const rect = skillsSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        if (isVisible) {
-            // Section is already visible, trigger animation after a short delay
-            setTimeout(() => {
+    setTimeout(() => {
+        const skillsSection = document.querySelector('.skills-progress');
+        if (skillsSection) {
+            const rect = skillsSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (isVisible) {
+                console.log('Skills section already visible, animating now');
                 skillBars.forEach(bar => {
                     const percent = bar.getAttribute('data-percent');
                     if (percent) {
-                        bar.offsetHeight; // Force reflow
-                        bar.style.width = percent + '%';
+                        setTimeout(() => {
+                            bar.style.width = percent + '%';
+                            console.log('Set width to', percent + '%');
+                        }, 100);
                     }
                 });
-            }, 300);
+            }
         }
-    }
+    }, 500);
 }
 
 // Observe all fade-in elements
