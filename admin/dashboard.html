@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen" x-data="dashboard()" x-cloak>
+    <!-- Sidebar -->
+    <div class="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg z-40">
+        <div class="h-full flex flex-col">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Admin Panel</h1>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Portfolio Management</p>
+            </div>
+            
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <a href="dashboard.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                    <i class="fas fa-chart-line w-5 mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="blog.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-blog w-5 mr-3"></i>
+                    Blog Posts
+                </a>
+                <a href="projects.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-project-diagram w-5 mr-3"></i>
+                    Projects
+                </a>
+                <a href="testimonials.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-quote-left w-5 mr-3"></i>
+                    Testimonials
+                </a>
+                <a href="skills.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-code w-5 mr-3"></i>
+                    Skills
+                </a>
+                <a href="messages.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-envelope w-5 mr-3"></i>
+                    Messages
+                </a>
+                <a href="profile.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-user w-5 mr-3"></i>
+                    Profile
+                </a>
+                <a href="settings.html" class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-cog w-5 mr-3"></i>
+                    SEO Settings
+                </a>
+            </nav>
+            
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <button id="logoutBtn" class="w-full flex items-center px-4 py-3 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition">
+                    <i class="fas fa-sign-out-alt w-5 mr-3"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64">
+        <!-- Header -->
+        <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+            <div class="px-6 py-4 flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h2>
+                <button id="themeToggle" class="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <main class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Blog Posts</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2" x-text="stats.blog"></p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-blog text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Projects</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2" x-text="stats.projects"></p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-project-diagram text-green-600 dark:text-green-400 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Testimonials</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2" x-text="stats.testimonials"></p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-quote-left text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Messages</p>
+                            <p class="text-3xl font-bold text-gray-900 dark:text-white mt-2" x-text="stats.messages"></p>
+                        </div>
+                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-envelope text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="blog.html" class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <i class="fas fa-plus-circle text-blue-600 dark:text-blue-400 mb-2"></i>
+                        <p class="font-medium text-gray-900 dark:text-white">New Blog Post</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Create a new blog post</p>
+                    </a>
+                    <a href="projects.html" class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <i class="fas fa-plus-circle text-green-600 dark:text-green-400 mb-2"></i>
+                        <p class="font-medium text-gray-900 dark:text-white">New Project</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Add a new project</p>
+                    </a>
+                    <a href="messages.html" class="p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <i class="fas fa-envelope-open text-yellow-600 dark:text-yellow-400 mb-2"></i>
+                        <p class="font-medium text-gray-900 dark:text-white">View Messages</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Check contact messages</p>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/github-api.js"></script>
+    <script src="js/admin-layout.js"></script>
+    <script>
+        function dashboard() {
+            return {
+                stats: {
+                    blog: 0,
+                    projects: 0,
+                    testimonials: 0,
+                    messages: 0
+                },
+
+                async init() {
+                    await this.loadStats();
+                },
+
+                async loadStats() {
+                    try {
+                        const [blog, projects, testimonials, messages] = await Promise.all([
+                            window.loadJSON('/data/blog.json'),
+                            window.loadJSON('/data/projects.json'),
+                            window.loadJSON('/data/testimonials.json'),
+                            window.loadJSON('/data/messages.json')
+                        ]);
+
+                        this.stats.blog = blog?.length || 0;
+                        this.stats.projects = projects?.length || 0;
+                        this.stats.testimonials = testimonials?.length || 0;
+                        this.stats.messages = messages?.length || 0;
+                    } catch (error) {
+                        console.error('Error loading stats:', error);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
