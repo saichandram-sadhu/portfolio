@@ -164,6 +164,10 @@
                             <i class="fas fa-eye"></i>
                             View Work
                         </a>
+                        <a href="resume.pdf" class="btn btn-secondary" download onclick="if(typeof gtag!=='undefined'){gtag('event','download',{'event_category':'Resume','event_label':'Resume Download'});}">
+                            <i class="fas fa-download"></i>
+                            Download Resume
+                        </a>
                     </div>
                 </div>
                 
@@ -171,7 +175,7 @@
                     <div class="glass-layer layer-1"></div>
                     <div class="glass-layer layer-2"></div>
                     <div class="avatar-card">
-                        <video src="assets/images/avatar.mp4" alt="Saichandram Sadhu" class="avatar-image" id="avatarImage" autoplay loop muted playsinline loading="lazy" aria-label="Saichandram Sadhu animated avatar"></video>
+                        <video src="assets/images/avatar.mp4" alt="Saichandram Sadhu" class="avatar-image" id="avatarImage" autoplay loop muted playsinline loading="lazy" preload="metadata" aria-label="Saichandram Sadhu animated avatar"></video>
                     </div>
                 </div>
             </div>
@@ -205,6 +209,69 @@
                             <div class="metric-number">M.Sc.</div>
                             <div class="metric-label">Cyber Security</div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Progress Section -->
+    <section class="skills-progress" id="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">Core Skills</h2>
+            <div class="skills-grid fade-in">
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">VAPT & Penetration Testing</span>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Intrusion Detection Systems</span>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="85"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Malware Forensics</span>
+                        <span class="skill-percentage">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="88"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Python Programming</span>
+                        <span class="skill-percentage">82%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="82"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Network Security</span>
+                        <span class="skill-percentage">87%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="87"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header">
+                        <span class="skill-name">Digital Forensics</span>
+                        <span class="skill-percentage">83%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-percent="83"></div>
                     </div>
                 </div>
             </div>
@@ -384,7 +451,8 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <i class="fas fa-user"></i>
+                                <img src="assets/images/testimonial-1.jpg" alt="Project Manager" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div style="display: none;"><i class="fas fa-user"></i></div>
                             </div>
                             <div class="author-info">
                                 <h4 class="author-name">Project Manager</h4>
@@ -403,7 +471,8 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <i class="fas fa-user"></i>
+                                <img src="assets/images/testimonial-2.jpg" alt="Senior Security Engineer" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div style="display: none;"><i class="fas fa-user"></i></div>
                             </div>
                             <div class="author-info">
                                 <h4 class="author-name">Senior Security Engineer</h4>
@@ -422,7 +491,8 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <i class="fas fa-user"></i>
+                                <img src="assets/images/testimonial-3.jpg" alt="Security Researcher" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div style="display: none;"><i class="fas fa-user"></i></div>
                             </div>
                             <div class="author-info">
                                 <h4 class="author-name">Security Researcher</h4>
@@ -572,7 +642,8 @@
             <div class="projects-grid">
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <div class="project-placeholder">
+                        <img src="assets/images/ids-project.jpg" alt="AI-Powered Intrusion Detection System" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-placeholder" style="display: none;">
                             <i class="fas fa-brain"></i>
                         </div>
                     </div>
@@ -592,7 +663,8 @@
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <div class="project-placeholder">
+                        <img src="assets/images/botnet-detection.jpg" alt="Botnet Detection System" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-placeholder" style="display: none;">
                             <i class="fas fa-spider"></i>
                         </div>
                     </div>
@@ -612,7 +684,8 @@
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <div class="project-placeholder">
+                        <img src="assets/images/memory-forensics.jpg" alt="Linux Memory Forensics" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="project-placeholder" style="display: none;">
                             <i class="fas fa-microscope"></i>
                         </div>
                     </div>

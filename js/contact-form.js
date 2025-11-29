@@ -61,10 +61,29 @@ function initContactForm() {
             console.log('📧 Sending email via EmailJS...');
             await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, formData);
 
+            // Track form submission in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submission', {
+                    'event_category': 'Contact',
+                    'event_label': 'Contact Form',
+                    'value': 1
+                });
+            }
+
             showFormMessage("✅ Message sent successfully!", "success");
             contactForm.reset();
         } catch (err) {
             console.error('❌ EmailJS Error:', err);
+            
+            // Track form error in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_error', {
+                    'event_category': 'Contact',
+                    'event_label': 'Contact Form Error',
+                    'value': 0
+                });
+            }
+            
             showFormMessage("❌ Failed to send message. Try again.", "error");
         }
 

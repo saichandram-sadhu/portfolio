@@ -143,8 +143,38 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+// Initialize Skills Progress Bars
+function initSkillsProgress() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    if (skillBars.length === 0) return;
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const progressBar = entry.target;
+                const percent = progressBar.getAttribute('data-percent');
+                if (percent) {
+                    progressBar.style.width = percent + '%';
+                }
+                observer.unobserve(progressBar);
+            }
+        });
+    }, observerOptions);
+    
+    skillBars.forEach(bar => {
+        observer.observe(bar);
+    });
+}
+
 // Observe all fade-in elements
 document.addEventListener('DOMContentLoaded', () => {
+    initSkillsProgress();
     const fadeElements = document.querySelectorAll('.fade-in, .tech-card, .project-card, .experience-item, .education-card');
     
     fadeElements.forEach(el => {
