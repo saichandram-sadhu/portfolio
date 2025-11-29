@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: portfolio-backend
+    env: python
+    region: oregon
+    plan: free
+    autoDeploy: true
+    branch: main
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_SECRET_KEY
+        fromService:
+          type: web
+          name: portfolio-backend
+          property: env.SECRET_KEY
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: portfolio-backend.onrender.com,localhost
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://saichandram-sadhu.pages.dev
+
+databases:
+  - name: portfolio-db
+    plan: free
+
