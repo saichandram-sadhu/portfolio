@@ -24,13 +24,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'apps.blog',
-    'apps.projects',
-    'apps.testimonials',
-    'apps.skills',
-    'apps.messages.apps.MessagesConfig',  # Use explicit config to avoid conflict
-    'apps.profile',
-    'apps.seo',
+    'apps.blog.apps.BlogConfig',
+    'apps.projects.apps.ProjectsConfig',
+    'apps.testimonials.apps.TestimonialsConfig',
+    'apps.skills.apps.SkillsConfig',
+    'apps.messages.apps.MessagesConfig',
+    'apps.profile.apps.ProfileConfig',
+    'apps.seo.apps.SeoConfig',
 ]
 
 MIDDLEWARE = [
