@@ -827,12 +827,13 @@ video.about-avatar {
     height: 100%;
     background: linear-gradient(90deg, #5ac8fa, #007AFF);
     border-radius: 10px;
-    width: 0% !important;
+    width: 0%;
     transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    min-height: 12px;
-    display: block;
+    min-height: 14px;
+    display: block !important;
+    box-shadow: 0 2px 8px rgba(90, 200, 250, 0.4);
 }
 
 .skill-progress::after {
