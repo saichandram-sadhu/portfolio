@@ -29,11 +29,25 @@ function initContactForm() {
 
     console.log('✅ Form elements found, attaching submit handler');
 
-    // Submit handler
+    // Prevent any default form submission
+    contactForm.setAttribute('action', '#');
+    contactForm.setAttribute('method', 'post');
+    
+    // Add click handler to button as backup (capture phase)
+    submitBtn.addEventListener('click', (e) => {
+        console.log('🔘 Submit button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+    }, true);
+
+    // Submit handler - MUST be first to catch event
     contactForm.addEventListener('submit', async (e) => {
         console.log('🚀 Form submit event triggered');
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
 
         if (!validateForm()) {
             console.log('❌ Form validation failed');
