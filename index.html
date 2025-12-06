@@ -156,6 +156,24 @@
         <span class="sr-only">Back to top</span>
     </button>
 
+    <!-- Sticky Navigation Menu -->
+    <nav class="sticky-nav" id="stickyNav" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">SS</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="nav-toggle-icon"></span>
+            </button>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero" id="hero" role="banner">
         <div id="main-content" tabindex="-1"></div>
@@ -468,8 +486,7 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <img src="assets/images/testimonial-1.jpg" alt="Project Manager" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div style="display: none;"><i class="fas fa-user"></i></div>
+                                <i class="fas fa-user"></i>
                             </div>
                             <div class="author-info">
                                 <h4 class="author-name">Project Manager</h4>
@@ -488,8 +505,7 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <img src="assets/images/testimonial-2.jpg" alt="Senior Security Engineer" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div style="display: none;"><i class="fas fa-user"></i></div>
+                                <i class="fas fa-user"></i>
                             </div>
                             <div class="author-info">
                                 <h4 class="author-name">Senior Security Engineer</h4>
@@ -508,8 +524,7 @@
                         </p>
                         <div class="testimonial-author">
                             <div class="author-avatar">
-                                <img src="assets/images/testimonial-3.jpg" alt="Security Researcher" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div style="display: none;"><i class="fas fa-user"></i></div>
+                                <i class="fas fa-user"></i>
                             </div>
                             <div class="author-info">
                                 <h4 class="author-name">Security Researcher</h4>
@@ -574,6 +589,12 @@
                             <li>Reduced false positives by 40%</li>
                             <li>Automated threat classification and reporting</li>
                         </ul>
+                        <div class="case-study-links" style="margin-top: 24px;">
+                            <a href="https://github.com/saichandram-sadhu/AI-POWERD-IDS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View AI-Powered IDS repository on GitHub">
+                                <i class="fab fa-github"></i>
+                                <span>View Repository</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="case-study-card fade-in">
@@ -648,6 +669,51 @@
                         </ul>
                     </div>
                 </div>
+                <div class="case-study-card fade-in">
+                    <div class="case-study-header">
+                        <div class="case-study-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="case-study-meta">
+                            <span class="case-study-category">SOC/DFIR</span>
+                            <span class="case-study-year">2024-2025</span>
+                        </div>
+                    </div>
+                    <h3 class="case-study-title">SOC Threat Hunting & DFIR Portfolio</h3>
+                    <p class="case-study-client">Comprehensive Security Operations Portfolio</p>
+                    <div class="case-study-content">
+                        <h4 class="case-study-subtitle">Overview</h4>
+                        <p class="case-study-text">
+                            A comprehensive portfolio demonstrating expertise in Security Operations Center (SOC) operations, proactive threat hunting, and digital forensics & incident response (DFIR). Includes real-world case studies, detection rules, and automation scripts.
+                        </p>
+                        <h4 class="case-study-subtitle">Key Components</h4>
+                        <ul class="case-study-results">
+                            <li>MITRE ATT&CK hypothesis-driven threat hunting</li>
+                            <li>Memory forensics with Volatility 3</li>
+                            <li>Malware analysis workflows and YARA rules</li>
+                            <li>Detection rules (Sigma, KQL, SPL)</li>
+                            <li>AI-powered intrusion detection systems</li>
+                            <li>Botnet detection and network analysis</li>
+                            <li>Forensic timeline reconstruction</li>
+                        </ul>
+                        <h4 class="case-study-subtitle">Technologies</h4>
+                        <div class="case-study-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">YARA</span>
+                            <span class="tag">Sigma</span>
+                            <span class="tag">Volatility</span>
+                            <span class="tag">Sysmon</span>
+                            <span class="tag">Wazuh</span>
+                            <span class="tag">ELK Stack</span>
+                        </div>
+                        <div class="case-study-links" style="margin-top: 24px;">
+                            <a href="https://github.com/saichandram-sadhu/soc-threat-hunting-dfir-portfolio" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View SOC Threat Hunting & DFIR Portfolio repository on GitHub">
+                                <i class="fab fa-github"></i>
+                                <span>View Repository</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -659,8 +725,7 @@
             <div class="projects-grid">
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <img src="assets/images/ids-project.jpg" alt="AI-Powered Intrusion Detection System" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="project-placeholder" style="display: none;">
+                        <div class="project-placeholder" style="display: flex;">
                             <i class="fas fa-brain"></i>
                         </div>
                     </div>
@@ -676,12 +741,17 @@
                             <span class="tag">IDS</span>
                             <span class="tag">Network Security</span>
                         </div>
+                        <div class="project-links" style="margin-top: 20px; display: flex; gap: 12px;">
+                            <a href="https://github.com/saichandram-sadhu/AI-POWERD-IDS" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View AI-Powered IDS on GitHub">
+                                <i class="fab fa-github"></i>
+                                <span>View on GitHub</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <img src="assets/images/botnet-detection.jpg" alt="Botnet Detection System" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="project-placeholder" style="display: none;">
+                        <div class="project-placeholder" style="display: flex;">
                             <i class="fas fa-spider"></i>
                         </div>
                     </div>
@@ -701,8 +771,7 @@
                 </div>
                 <div class="project-card fade-in">
                     <div class="project-image">
-                        <img src="assets/images/memory-forensics.jpg" alt="Linux Memory Forensics" class="project-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="project-placeholder" style="display: none;">
+                        <div class="project-placeholder" style="display: flex;">
                             <i class="fas fa-microscope"></i>
                         </div>
                     </div>
@@ -717,6 +786,33 @@
                             <span class="tag">Memory Forensics</span>
                             <span class="tag">Malware Analysis</span>
                             <span class="tag">Linux</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="project-placeholder" style="display: flex;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">SOC Threat Hunting & DFIR Portfolio</h3>
+                        <p class="project-description">
+                            Comprehensive portfolio showcasing SOC operations, threat hunting, digital forensics, and incident response capabilities. 
+                            Includes memory forensics, malware analysis, detection rules, and AI-powered security solutions.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">SOC</span>
+                            <span class="tag">Threat Hunting</span>
+                            <span class="tag">DFIR</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">YARA</span>
+                        </div>
+                        <div class="project-links" style="margin-top: 20px; display: flex; gap: 12px;">
+                            <a href="https://github.com/saichandram-sadhu/soc-threat-hunting-dfir-portfolio" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="View SOC Threat Hunting & DFIR Portfolio on GitHub">
+                                <i class="fab fa-github"></i>
+                                <span>View on GitHub</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1059,14 +1155,14 @@
                 </form>
                 
                 <div class="contact-info">
-                    <p class="contact-detail">
+                    <a href="tel:+918160056105" class="contact-detail">
                         <i class="fas fa-phone"></i>
                         <span>+91-8160056105</span>
-                    </p>
-                    <p class="contact-detail">
+                    </a>
+                    <a href="mailto:saichandram.sadhu.it@gmail.com" class="contact-detail">
                         <i class="fas fa-envelope"></i>
                         <span>saichandram.sadhu.it@gmail.com</span>
-                    </p>
+                    </a>
                     <p class="contact-detail">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Ahmedabad, Gujarat, India</span>

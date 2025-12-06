@@ -18,6 +18,85 @@ window.addEventListener('error', (e) => {
 });
 
 // ============================================
+// STICKY NAVIGATION MENU
+// ============================================
+
+const stickyNav = document.getElementById('stickyNav');
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+// Show/hide sticky nav on scroll
+let lastScrollTop = 0;
+function handleStickyNav() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > 100) {
+        stickyNav.classList.add('visible');
+    } else {
+        stickyNav.classList.remove('visible');
+    }
+    
+    // Hide nav when scrolling down, show when scrolling up
+    if (scrollTop > lastScrollTop && scrollTop > 200) {
+        stickyNav.style.transform = 'translateY(-100%)';
+    } else {
+        stickyNav.style.transform = 'translateY(0)';
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+}
+
+window.addEventListener('scroll', handleStickyNav, { passive: true });
+
+// Mobile menu toggle
+if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => {
+        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', !isExpanded);
+        navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navToggle.setAttribute('aria-expanded', 'false');
+            navMenu.classList.remove('active');
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+            navToggle.setAttribute('aria-expanded', 'false');
+            navMenu.classList.remove('active');
+        }
+    });
+}
+
+// Active nav link on scroll
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPos = window.scrollY + 150;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+        
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+
+// ============================================
 // DARK MODE TOGGLE
 // ============================================
 
@@ -303,7 +382,7 @@ if (aboutAvatar && aboutAvatar.tagName === 'VIDEO') {
 // ENHANCED SCROLL ANIMATIONS
 // ============================================
 
-let lastScrollTop = 0;
+let scrollTopPrev = 0;
 let ticking = false;
 
 function handleScroll() {
@@ -316,7 +395,7 @@ function handleScroll() {
         heroBackground.style.transform = `translateY(${parallaxSpeed}px)`;
     }
     
-    lastScrollTop = scrollTop;
+    scrollTopPrev = scrollTop;
     ticking = false;
 }
 
@@ -328,14 +407,23 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================
-// CARD HOVER ENHANCEMENTS
+// CARD HOVER ENHANCEMENTS WITH SMOOTH TRANSITIONS
 // ============================================
 
-const cards = document.querySelectorAll('.tech-card, .project-card');
+const cards = document.querySelectorAll('.tech-card, .project-card, .cert-card, .education-card, .case-study-card');
 
 cards.forEach(card => {
     card.addEventListener('mouseenter', function() {
-        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+    
+    // Add a subtle glow effect on hover
+    card.addEventListener('mouseenter', function() {
+        this.style.filter = 'brightness(1.05)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.filter = 'brightness(1)';
     });
 });
 
@@ -407,13 +495,22 @@ if (backToTop) {
 window.addEventListener('scroll', toggleBackToTop, { passive: true });
 
 // ============================================
-// 3D CARD TILT EFFECT
+// 3D CARD TILT EFFECT - ENHANCED
 // ============================================
 
 function init3DCardTilt() {
-    const cards = document.querySelectorAll('.tech-card, .project-card, .education-card');
+    const cards = document.querySelectorAll('.tech-card, .project-card, .education-card, .cert-card, .case-study-card');
     
     cards.forEach(card => {
+        let tiltEnabled = true;
+        
+        // Disable tilt on touch devices
+        if ('ontouchstart' in window) {
+            tiltEnabled = false;
+        }
+        
+        if (!tiltEnabled) return;
+        
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -422,33 +519,53 @@ function init3DCardTilt() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
+            // Normalize values (-1 to 1)
+            const normalizedX = (x - centerX) / centerX;
+            const normalizedY = (y - centerY) / centerY;
+            
+            // Calculate rotation (reduced intensity for smoother effect)
+            const rotateX = normalizedY * 8;
+            const rotateY = normalizedX * 8;
+            
+            // Calculate shadow offset for depth
+            const shadowX = normalizedX * 10;
+            const shadowY = normalizedY * 10;
             
             // Different transforms for different card types
             if (card.classList.contains('tech-card')) {
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                card.style.boxShadow = `${shadowX}px ${shadowY}px 40px rgba(90, 200, 250, 0.2), var(--shadow-xl)`;
             } else if (card.classList.contains('project-card')) {
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-            } else if (card.classList.contains('education-card')) {
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) translateY(-8px)`;
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+                card.style.boxShadow = `${shadowX}px ${shadowY}px 40px rgba(90, 200, 250, 0.2), var(--shadow-xl)`;
+            } else if (card.classList.contains('education-card') || card.classList.contains('cert-card')) {
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX * 0.5}deg) translateY(-8px)`;
+                card.style.boxShadow = `0 ${shadowY}px 40px rgba(90, 200, 250, 0.2), var(--shadow-xl)`;
+            } else if (card.classList.contains('case-study-card')) {
+                card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY * 0.5}deg) translateY(-8px)`;
             }
         });
         
         card.addEventListener('mouseleave', () => {
-            // Reset to default hover state
+            // Smooth reset with transition
+            card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            
             if (card.classList.contains('tech-card')) {
                 card.style.transform = 'translateY(-8px) rotateX(2deg) rotateY(2deg)';
             } else if (card.classList.contains('project-card')) {
                 card.style.transform = 'translateY(-8px) rotateX(2deg) rotateY(-2deg)';
-            } else if (card.classList.contains('education-card')) {
+            } else if (card.classList.contains('education-card') || card.classList.contains('cert-card')) {
                 card.style.transform = 'translateY(-8px) rotateX(2deg)';
+            } else if (card.classList.contains('case-study-card')) {
+                card.style.transform = 'translateY(-8px)';
             }
             
-            // Reset after transition
+            card.style.boxShadow = '';
+            
+            // Reset transition after animation
             setTimeout(() => {
-                card.style.transform = '';
-            }, 300);
+                card.style.transition = '';
+            }, 500);
         });
     });
 }
@@ -524,24 +641,55 @@ if (heroTitle) {
 }
 
 // ============================================
-// MAGNETIC CURSOR EFFECT (Optional)
+// MAGNETIC CURSOR EFFECT - ENHANCED
 // ============================================
 
 function initMagneticEffect() {
-    const magneticElements = document.querySelectorAll('.btn, .social-link, .theme-toggle, .back-to-top');
+    const magneticElements = document.querySelectorAll('.btn, .social-link, .theme-toggle, .back-to-top, .testimonial-btn');
     
     magneticElements.forEach(element => {
+        // Skip on touch devices
+        if ('ontouchstart' in window) return;
+        
+        let currentX = 0;
+        let currentY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        
         element.addEventListener('mousemove', (e) => {
             const rect = element.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
             
-            element.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            targetX = x * 0.3;
+            targetY = y * 0.3;
         });
         
         element.addEventListener('mouseleave', () => {
-            element.style.transform = 'translate(0, 0)';
+            targetX = 0;
+            targetY = 0;
         });
+        
+        // Smooth animation loop
+        function animateMagnetic() {
+            currentX += (targetX - currentX) * 0.1;
+            currentY += (targetY - currentY) * 0.1;
+            
+            if (Math.abs(targetX - currentX) > 0.01 || Math.abs(targetY - currentY) > 0.01) {
+                element.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                requestAnimationFrame(animateMagnetic);
+            } else {
+                element.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            }
+        }
+        
+        // Start animation loop
+        function startAnimation() {
+            animateMagnetic();
+            requestAnimationFrame(startAnimation);
+        }
+        
+        startAnimation();
     });
 }
 
@@ -550,33 +698,104 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================
-// ENHANCED SCROLL ANIMATIONS
+// ENHANCED SCROLL ANIMATIONS WITH STAGGERING
 // ============================================
 
 const scrollObserverOptions = {
-    threshold: 0.15,
+    threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
+// Stagger animation function
+function animateWithStagger(elements, delay = 100) {
+    elements.forEach((el, index) => {
+        setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0) scale(1)';
+            el.classList.add('animated');
+        }, index * delay);
+    });
+}
+
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0) scale(1)';
-            entry.target.classList.add('animated');
+        if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+            // Get parent container to stagger siblings
+            const container = entry.target.parentElement;
+            const siblings = Array.from(container.children).filter(
+                child => child.classList.contains(entry.target.className.split(' ')[0])
+            );
+            
+            if (siblings.length > 1) {
+                // Stagger animation for grid items
+                const index = siblings.indexOf(entry.target);
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                    entry.target.classList.add('animated');
+                }, index * 80);
+            } else {
+                // Single item animation
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0) scale(1)';
+                entry.target.classList.add('animated');
+            }
         }
     });
 }, scrollObserverOptions);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.tech-card, .project-card, .experience-item, .education-card');
+    // Tech cards with stagger
+    const techCards = document.querySelectorAll('.tech-card');
+    techCards.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px) scale(0.95)';
+        el.style.transition = `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s`;
+        scrollObserver.observe(el);
+    });
     
-    animatedElements.forEach(el => {
-        if (!el.classList.contains('experience-item')) {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(40px) scale(0.95)';
-            el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-        }
+    // Project cards with stagger
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px) scale(0.95)';
+        el.style.transition = `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s`;
+        scrollObserver.observe(el);
+    });
+    
+    // Education cards
+    const educationCards = document.querySelectorAll('.education-card');
+    educationCards.forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px) scale(0.95)';
+        el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+        scrollObserver.observe(el);
+    });
+    
+    // Cert cards
+    const certCards = document.querySelectorAll('.cert-card');
+    certCards.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'scale(0.9)';
+        el.style.transition = `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.08}s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.08}s`;
+        scrollObserver.observe(el);
+    });
+    
+    // Case study cards
+    const caseStudyCards = document.querySelectorAll('.case-study-card');
+    caseStudyCards.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
+        el.style.transition = `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        scrollObserver.observe(el);
+    });
+    
+    // Blog cards
+    const blogCards = document.querySelectorAll('.blog-card:not(.hidden)');
+    blogCards.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = `opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.06}s, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.06}s`;
         scrollObserver.observe(el);
     });
 });
