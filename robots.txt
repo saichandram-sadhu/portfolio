@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://saichandram-sadhu.pages.dev/sitemap.xml
+Crawl-delay: 5

@@ -1,0 +1,136 @@
+name: SEO Validation CI
+
+on:
+  push:
+    branches: [ main, feature/* ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  seo-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Validate sitemap.xml exists
+      run: |
+        if [ ! -f sitemap.xml ]; then
+          echo "❌ ERROR: sitemap.xml not found"
+          exit 1
+        fi
+        echo "✅ sitemap.xml exists"
+        
+    - name: Validate sitemap.xml format
+      run: |
+        if ! xmllint --noout sitemap.xml 2>/dev/null; then
+          echo "⚠️  WARNING: sitemap.xml may have XML syntax issues (install xmllint for full validation)"
+        else
+          echo "✅ sitemap.xml is valid XML"
+        fi
+        
+    - name: Check sitemap URLs are Cloudflare Pages
+      run: |
+        if grep -q "netlify.app" sitemap.xml; then
+          echo "❌ ERROR: sitemap.xml contains Netlify URLs. Must use pages.dev"
+          exit 1
+        fi
+        if ! grep -q "pages.dev" sitemap.xml; then
+          echo "❌ ERROR: sitemap.xml does not contain pages.dev URLs"
+          exit 1
+        fi
+        echo "✅ sitemap.xml uses correct Cloudflare Pages URLs"
+        
+    - name: Validate robots.txt exists
+      run: |
+        if [ ! -f robots.txt ]; then
+          echo "❌ ERROR: robots.txt not found"
+          exit 1
+        fi
+        echo "✅ robots.txt exists"
+        
+    - name: Check robots.txt has sitemap
+      run: |
+        if ! grep -q "Sitemap:" robots.txt; then
+          echo "❌ ERROR: robots.txt missing Sitemap declaration"
+          exit 1
+        fi
+        if ! grep -q "pages.dev" robots.txt; then
+          echo "❌ ERROR: robots.txt sitemap URL must use pages.dev"
+          exit 1
+        fi
+        echo "✅ robots.txt has correct sitemap reference"
+        
+    - name: Validate index.html meta tags
+      run: |
+        if [ ! -f index.html ]; then
+          echo "❌ ERROR: index.html not found"
+          exit 1
+        fi
+        
+        # Check for required meta tags
+        MISSING_TAGS=0
+        
+        if ! grep -q '<meta name="description"' index.html; then
+          echo "❌ ERROR: Missing meta description"
+          MISSING_TAGS=1
+        fi
+        
+        if ! grep -q 'rel="canonical"' index.html; then
+          echo "❌ ERROR: Missing canonical link"
+          MISSING_TAGS=1
+        fi
+        
+        if ! grep -q 'property="og:image"' index.html; then
+          echo "❌ ERROR: Missing og:image"
+          MISSING_TAGS=1
+        fi
+        
+        if ! grep -q 'property="og:title"' index.html; then
+          echo "❌ ERROR: Missing og:title"
+          MISSING_TAGS=1
+        fi
+        
+        if [ $MISSING_TAGS -eq 1 ]; then
+          exit 1
+        fi
+        
+        echo "✅ All required meta tags present"
+        
+    - name: Check for Netlify URLs in index.html
+      run: |
+        if grep -q "netlify.app" index.html; then
+          echo "❌ ERROR: index.html contains Netlify URLs. Must use pages.dev"
+          exit 1
+        fi
+        echo "✅ index.html uses correct Cloudflare Pages URLs"
+        
+    - name: Validate JSON-LD structured data
+      run: |
+        if ! grep -q 'application/ld+json' index.html; then
+          echo "⚠️  WARNING: No JSON-LD structured data found"
+        else
+          echo "✅ JSON-LD structured data present"
+        fi
+        
+    - name: Check data/seo.json exists
+      run: |
+        if [ ! -f data/seo.json ]; then
+          echo "⚠️  WARNING: data/seo.json not found"
+        else
+          echo "✅ data/seo.json exists"
+        fi
+        
+    - name: SEO Validation Summary
+      run: |
+        echo "## ✅ SEO Validation Complete"
+        echo ""
+        echo "All critical SEO checks passed!"
+        echo ""
+        echo "### Next Steps:"
+        echo "1. Verify sitemap is accessible: https://saichandram-sadhu.pages.dev/sitemap.xml"
+        echo "2. Verify robots.txt is accessible: https://saichandram-sadhu.pages.dev/robots.txt"
+        echo "3. Submit sitemap in Google Search Console"
+        echo "4. Request indexing for homepage"
+
