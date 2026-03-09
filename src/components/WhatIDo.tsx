@@ -87,22 +87,22 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>FRONTEND</h3>
-              <h4>Building Interactive UIs</h4>
+              <h3>BLUE TEAM</h3>
+              <h4>SOC & Threat Detection</h4>
               <p>
-                Crafting performant, responsive interfaces with modern frameworks.
-                From SPAs to micro-frontends, I deliver pixel-perfect experiences.
+                Real-time alert monitoring, threat hunting, and incident response.
+                Specialized in SIEM platforms and network traffic analysis.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">React.js</div>
-                <div className="what-tags">Angular</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">Material UI</div>
-                <div className="what-tags">HTML5</div>
-                <div className="what-tags">CSS3</div>
+                <div className="what-tags">Wireshark</div>
+                <div className="what-tags">Wazuh</div>
+                <div className="what-tags">Splunk</div>
+                <div className="what-tags">ELK Stack</div>
+                <div className="what-tags">Threat Hunting</div>
+                <div className="what-tags">Incident Response</div>
+                <div className="what-tags">Log Analysis</div>
+                <div className="what-tags">Sysmon</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -126,22 +126,22 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>BACKEND</h3>
-              <h4>Scalable Server Architecture</h4>
+              <h3>DFIR & OFFENSIVE</h3>
+              <h4>Forensics & Pen Testing</h4>
               <p>
-                Designing robust APIs and microservices. From CMS platforms to
-                complex business logic, I build backends that scale.
+                Digital forensics investigation, malware analysis, and vulnerability
+                assessments. Python automation for AI-driven intrusion detection.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">NestJS</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">Microservices</div>
+                <div className="what-tags">Volatility</div>
+                <div className="what-tags">Nmap</div>
+                <div className="what-tags">Metasploit</div>
+                <div className="what-tags">Burp Suite</div>
                 <div className="what-tags">Python</div>
+                <div className="what-tags">MITRE ATT&CK</div>
+                <div className="what-tags">YARA</div>
+                <div className="what-tags">Malware Analysis</div>
               </div>
               <div className="what-arrow"></div>
             </div>
