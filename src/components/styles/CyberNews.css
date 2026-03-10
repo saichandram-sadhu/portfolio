@@ -5,6 +5,10 @@
   padding: 80px 0;
 }
 
+.news-container {
+  margin: auto;
+}
+
 .news-header {
   display: flex;
   align-items: flex-end;

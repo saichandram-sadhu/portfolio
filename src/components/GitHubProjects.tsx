@@ -50,7 +50,8 @@ const GitHubProjects = () => {
   }, []);
 
   return (
-    <div className="github-section section-container" id="github">
+    <div className="github-section" id="github">
+      <div className="github-container section-container">
       <div className="github-header">
         <h2>
           GitHub <span>Projects</span>
@@ -120,6 +121,7 @@ const GitHubProjects = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };

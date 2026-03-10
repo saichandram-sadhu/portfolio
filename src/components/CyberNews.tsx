@@ -56,7 +56,8 @@ const CyberNews = () => {
   }, [fetchNews]);
 
   return (
-    <div className="news-section section-container">
+    <div className="news-section">
+      <div className="news-container section-container">
       <div className="news-header">
         <h2>
           Cyber <span>News</span>
@@ -120,6 +121,7 @@ const CyberNews = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };
