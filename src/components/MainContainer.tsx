@@ -11,6 +11,8 @@ import Work from "./Work";
 import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
+const GitHubProjects = lazy(() => import("./GitHubProjects"));
+const CyberNews = lazy(() => import("./CyberNews"));
 
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
@@ -48,6 +50,12 @@ const MainContainer = ({ children }: PropsWithChildren) => {
                 <TechStack />
               </Suspense>
             )}
+            <Suspense fallback={<div></div>}>
+              <GitHubProjects />
+            </Suspense>
+            <Suspense fallback={<div></div>}>
+              <CyberNews />
+            </Suspense>
             <Contact />
           </div>
         </div>
