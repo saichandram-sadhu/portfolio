@@ -9,9 +9,6 @@ type NewsItem = {
 };
 
 const RSS_API =
-  "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.devopsdigest.com%2Ffeed";
-
-const FALLBACK_RSS =
   "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.feedburner.com%2FTheHackersNews";
 
 const formatDate = (dateStr: string) => {
@@ -23,7 +20,7 @@ const formatDate = (dateStr: string) => {
   });
 };
 
-const DevOpsNews = () => {
+const CyberNews = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -41,28 +38,14 @@ const DevOpsNews = () => {
         if (data.status === "ok" && data.items?.length) {
           setNews(data.items.slice(0, 6));
           setLastUpdated(new Date());
-          setLoading(false);
         } else {
           throw new Error("empty");
         }
+        setLoading(false);
       })
       .catch(() => {
-        // Fallback to Hacker News feed
-        fetch(FALLBACK_RSS)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.status === "ok" && data.items?.length) {
-              setNews(data.items.slice(0, 6));
-              setLastUpdated(new Date());
-            } else {
-              setError(true);
-            }
-            setLoading(false);
-          })
-          .catch(() => {
-            setError(true);
-            setLoading(false);
-          });
+        setError(true);
+        setLoading(false);
       });
   }, []);
 
@@ -77,7 +60,7 @@ const DevOpsNews = () => {
       <div className="news-container section-container">
       <div className="news-header">
         <h2>
-          DevOps <span>News</span>
+          Cyber <span>News</span>
         </h2>
         <div className="news-meta">
           <span className="news-live-badge">● LIVE</span>
@@ -101,7 +84,7 @@ const DevOpsNews = () => {
           </button>
         </div>
       </div>
-      <p className="news-source">Source: DevOps Digest & The Hacker News</p>
+      <p className="news-source">Source: The Hacker News</p>
 
       {loading && (
         <div className="news-list">
@@ -143,4 +126,4 @@ const DevOpsNews = () => {
   );
 };
 
-export default DevOpsNews;
+export default CyberNews;

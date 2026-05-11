@@ -107,6 +107,26 @@
   font-size: 15px;
 }
 
+.carousel-link {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accentColor);
+  border: 1px solid var(--accentColor);
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.carousel-link:hover {
+  background: var(--accentColor);
+  color: #0a0a0a;
+  box-shadow: 0 0 15px rgba(94, 234, 212, 0.3);
+}
+
 .carousel-image-wrapper {
   flex: 1;
   display: flex;

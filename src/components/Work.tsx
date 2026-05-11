@@ -5,28 +5,35 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "ThreatVision Platform",
-    category: "Cloud Infrastructure",
-    tools: "AWS ECS Fargate, Terraform, Docker, GitHub Actions, RDS PostgreSQL",
+    title: "AI-Powered IDS",
+    category: "Security Tool",
+    tools: "Python, Machine Learning, Network Analysis",
     image: "/images/Solidx.png",
   },
   {
-    title: "CI/CD Pipeline Automation",
-    category: "DevOps Pipeline",
-    tools: "GitHub Actions, Docker Multi-Stage, ECR, Automated Testing",
+    title: "Botnet Detection System",
+    category: "Network Security",
+    tools: "Wireshark, Python, C2 Detection",
     image: "/images/radix.png",
   },
   {
-    title: "Infrastructure as Code",
-    category: "IaC & Cloud",
-    tools: "Terraform, AWS VPC, ALB, Security Groups, Auto Scaling",
+    title: "Linux Memory Forensics",
+    category: "Digital Forensics",
+    tools: "Volatility, Memory Analysis, DFIR",
     image: "/images/bond.png",
   },
   {
-    title: "Monitoring & Observability",
-    category: "Site Reliability",
-    tools: "Prometheus, Grafana, ELK Stack, CloudWatch, Alerting",
+    title: "SOC Threat Hunting Portfolio",
+    category: "SOC / DFIR",
+    tools: "MITRE ATT&CK, YARA, Sigma, KQL, SPL",
     image: "/images/sapphire.png",
+  },
+  {
+    title: "ThreatVision — DevOps Platform",
+    category: "Cloud Infrastructure & DevOps",
+    tools: "AWS ECS Fargate, Terraform, Docker, GitHub Actions, RDS PostgreSQL",
+    image: "/images/Maxlife.png",
+    link: "https://github.com/saichandram-sadhu/threatvision",
   },
 ];
 
@@ -106,6 +113,17 @@ const Work = () => {
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>
                         </div>
+                        {"link" in project && project.link && (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="carousel-link"
+                            data-cursor="disable"
+                          >
+                            View on GitHub ↗
+                          </a>
+                        )}
                       </div>
                     </div>
                     <div className="carousel-image-wrapper">
