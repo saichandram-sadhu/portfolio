@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- HEADER BANNER -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,30:0a192f,60:1a1a2e,100:16213e&height=200&section=header&text=DevOps%20Portfolio&fontSize=50&fontColor=00d4ff&animation=fadeIn&fontAlignY=35&desc=Saichandram%20Sadhu%20%E2%80%A2%20Cloud%20%26%20Infrastructure%20Engineer&descSize=18&descColor=38bdf8&descAlignY=55" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0a192f,100:16213e&height=200&section=header&text=DevOps%20Portfolio&fontSize=50&fontColor=00d4ff&animation=fadeIn&fontAlignY=35&desc=Saichandram%20Sadhu%20|%20Cloud%20Engineer&descSize=18&descColor=38bdf8&descAlignY=55" width="100%"/>
 
 <!-- TYPING SVG -->
 <a href="https://git.io/typing-svg">
@@ -214,6 +214,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,30:0a192f,60:1a1a2e,100:16213e&height=100&section=footer&text=Built%20with%20%E2%9D%A4%EF%B8%8F%20by%20Saichandram%20Sadhu&fontSize=14&fontColor=38bdf8&fontAlignY=70" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:0a192f,100:16213e&height=100&section=footer&text=Infrastructure%20as%20Code%20|%20Ship%20Fast%20|%20Stay%20Secure&fontSize=14&fontColor=38bdf8&fontAlignY=70" width="100%"/>
 
 </div>
