@@ -6,11 +6,13 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Blue-team-focused Cyber Security professional specializing in SOC analysis,
-          threat hunting, and digital forensics. Pursuing M.Sc. IT in Cyber Security
-          at Gujarat University. Skilled in SIEM monitoring (Wazuh, Splunk), network
-          traffic analysis, incident response, and malware analysis. Passionate about
-          building AI-driven security tools to defend against modern threats.
+          DevOps Engineer specializing in cloud infrastructure automation, CI/CD
+          pipeline design, and container orchestration. Pursuing M.Sc. IT in
+          Cyber Security at Gujarat University. Skilled in AWS (ECS Fargate, ECR,
+          RDS), Terraform for Infrastructure as Code, Docker containerization,
+          GitHub Actions workflows, and monitoring with Prometheus & Grafana.
+          Passionate about building production-grade, scalable infrastructure and
+          automating everything from deployment to security.
         </p>
       </div>
     </div>

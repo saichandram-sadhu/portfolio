@@ -87,22 +87,23 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>BLUE TEAM</h3>
-              <h4>SOC & Threat Detection</h4>
+              <h3>CLOUD & INFRA</h3>
+              <h4>AWS & Infrastructure as Code</h4>
               <p>
-                Real-time alert monitoring, threat hunting, and incident response.
-                Specialized in SIEM platforms and network traffic analysis.
+                Designing and deploying scalable cloud infrastructure on AWS.
+                Automating provisioning with Terraform and managing containerized
+                workloads on ECS Fargate & Kubernetes.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Wireshark</div>
-                <div className="what-tags">Wazuh</div>
-                <div className="what-tags">Splunk</div>
-                <div className="what-tags">ELK Stack</div>
-                <div className="what-tags">Threat Hunting</div>
-                <div className="what-tags">Incident Response</div>
-                <div className="what-tags">Log Analysis</div>
-                <div className="what-tags">Sysmon</div>
+                <div className="what-tags">AWS</div>
+                <div className="what-tags">Terraform</div>
+                <div className="what-tags">Docker</div>
+                <div className="what-tags">Kubernetes</div>
+                <div className="what-tags">ECS Fargate</div>
+                <div className="what-tags">CloudFormation</div>
+                <div className="what-tags">Linux</div>
+                <div className="what-tags">Networking</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -126,22 +127,23 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>DFIR & OFFENSIVE</h3>
-              <h4>Forensics & Pen Testing</h4>
+              <h3>CI/CD & AUTOMATION</h3>
+              <h4>Pipelines & Monitoring</h4>
               <p>
-                Digital forensics investigation, malware analysis, and vulnerability
-                assessments. Python automation for AI-driven intrusion detection.
+                Building automated CI/CD pipelines with GitHub Actions & Jenkins.
+                Implementing monitoring stacks with Prometheus, Grafana, and ELK
+                for full observability across production environments.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Volatility</div>
-                <div className="what-tags">Nmap</div>
-                <div className="what-tags">Metasploit</div>
-                <div className="what-tags">Burp Suite</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">MITRE ATT&CK</div>
-                <div className="what-tags">YARA</div>
-                <div className="what-tags">Malware Analysis</div>
+                <div className="what-tags">GitHub Actions</div>
+                <div className="what-tags">Jenkins</div>
+                <div className="what-tags">Ansible</div>
+                <div className="what-tags">Prometheus</div>
+                <div className="what-tags">Grafana</div>
+                <div className="what-tags">ELK Stack</div>
+                <div className="what-tags">Nginx</div>
+                <div className="what-tags">Shell Scripting</div>
               </div>
               <div className="what-arrow"></div>
             </div>

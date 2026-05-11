@@ -5,27 +5,27 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
-    title: "AI-Powered IDS",
-    category: "Security Tool",
-    tools: "Python, Machine Learning, Network Analysis",
+    title: "ThreatVision Platform",
+    category: "Cloud Infrastructure",
+    tools: "AWS ECS Fargate, Terraform, Docker, GitHub Actions, RDS PostgreSQL",
     image: "/images/Solidx.png",
   },
   {
-    title: "Botnet Detection System",
-    category: "Network Security",
-    tools: "Wireshark, Python, C2 Detection",
+    title: "CI/CD Pipeline Automation",
+    category: "DevOps Pipeline",
+    tools: "GitHub Actions, Docker Multi-Stage, ECR, Automated Testing",
     image: "/images/radix.png",
   },
   {
-    title: "Linux Memory Forensics",
-    category: "Digital Forensics",
-    tools: "Volatility, Memory Analysis, DFIR",
+    title: "Infrastructure as Code",
+    category: "IaC & Cloud",
+    tools: "Terraform, AWS VPC, ALB, Security Groups, Auto Scaling",
     image: "/images/bond.png",
   },
   {
-    title: "SOC Threat Hunting Portfolio",
-    category: "SOC / DFIR",
-    tools: "MITRE ATT&CK, YARA, Sigma, KQL, SPL",
+    title: "Monitoring & Observability",
+    category: "Site Reliability",
+    tools: "Prometheus, Grafana, ELK Stack, CloudWatch, Alerting",
     image: "/images/sapphire.png",
   },
 ];

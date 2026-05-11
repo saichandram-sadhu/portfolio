@@ -24,6 +24,9 @@ const LANG_COLORS: Record<string, string> = {
   C: "#555555",
   "C++": "#F34B7D",
   Go: "#00ADD8",
+  HCL: "#844FBA",
+  Dockerfile: "#384D54",
+  YAML: "#CB171E",
 };
 
 const GitHubProjects = () => {

@@ -13,6 +13,18 @@ import {
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
+  "/images/docker.webp",
+  "/images/terraform.webp",
+  "/images/aws.webp",
+  "/images/kubernetes.webp",
+  "/images/github-actions.webp",
+  "/images/jenkins.webp",
+  "/images/prometheus.webp",
+  "/images/grafana.webp",
+];
+
+// Fallback: if DevOps images don't exist yet, use existing ones
+const fallbackUrls = [
   "/images/splunk.webp",
   "/images/wireshark.webp",
   "/images/kali.webp",
@@ -22,7 +34,18 @@ const imageUrls = [
   "/images/snort.webp",
   "/images/pfsense.webp",
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
+
+// Try to load DevOps images, fallback to existing security ones
+const textures = imageUrls.map((url, i) => {
+  const texture = textureLoader.load(url, undefined, undefined, () => {
+    // On error, load fallback
+    textureLoader.load(fallbackUrls[i], (fallback) => {
+      texture.image = fallback.image;
+      texture.needsUpdate = true;
+    });
+  });
+  return texture;
+});
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
@@ -168,7 +191,7 @@ const TechStack = () => {
 
   return (
     <div className="techstack">
-      <h2> My Security Arsenal</h2>
+      <h2> My DevOps Arsenal</h2>
 
       <Canvas
         shadows
