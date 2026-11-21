@@ -6,13 +6,15 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          DevOps Engineer specializing in cloud infrastructure automation, CI/CD
-          pipeline design, and container orchestration. Pursuing M.Sc. IT in
-          Cyber Security at Gujarat University. Skilled in AWS (ECS Fargate, ECR,
-          RDS), Terraform for Infrastructure as Code, Docker containerization,
-          GitHub Actions workflows, and monitoring with Prometheus & Grafana.
-          Passionate about building production-grade, scalable infrastructure and
-          automating everything from deployment to security.
+          Junior System Administrator at TechMonarch with hands-on SOC
+          experience — I keep servers, networks, and users running smoothly
+          and securely. Skilled in Windows/Linux administration, Active
+          Directory, group policies, patch management, and backups — with a
+          security toolkit built on Wazuh SIEM, Splunk, and VirusTotal. I
+          automate everything with Python, Bash, and Docker, and ship cloud
+          infrastructure on AWS with Terraform and GitHub Actions, monitored
+          with Prometheus & Grafana. M.Sc. IT (Cyber Security) from Gujarat
+          University — because every system should run fast AND stay secure.
         </p>
       </div>
     </div>
