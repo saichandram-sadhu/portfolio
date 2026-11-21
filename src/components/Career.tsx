@@ -76,14 +76,30 @@ const Career = () => {
                 <h4>System Administrator Intern</h4>
                 <h5>TechMonarch</h5>
               </div>
+              <h3>2026</h3>
+            </div>
+            <p>
+              Selected as System Administrator Intern at TechMonarch, a managed
+              IT services company. Monitored and managed computers, networks,
+              and servers; handled user accounts, group policies, patch
+              management, backup solutions, and security compliance as part of
+              a structured 6-month training program.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Junior System Administrator</h4>
+                <h5>TechMonarch</h5>
+              </div>
               <h3>NOW</h3>
             </div>
             <p>
-              Monitoring and managing computers, networks, and servers to
+              Managing and maintaining computers, networks, and servers to
               ensure optimal performance and security. Handling user accounts,
-              group policies, patch management, backup solutions, and security
-              compliance as part of a structured 6-month training program
-              leading to a permanent Junior System Administrator role.
+              access permissions, group policies, patch management, backup
+              solutions, and security compliance in a production IT
+              environment.
             </p>
           </div>
         </div>
