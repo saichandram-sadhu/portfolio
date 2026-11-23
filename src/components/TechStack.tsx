@@ -23,6 +23,14 @@ const imageUrls = [
   "/images/jenkins.webp",
   "/images/prometheus.webp",
   "/images/grafana.webp",
+  "/images/splunk.webp",
+  "/images/wireshark.webp",
+  "/images/kali.webp",
+  "/images/burpsuite.webp",
+  "/images/snort.webp",
+  "/images/elk.webp",
+  "/images/pfsense.webp",
+  "/images/metasploit.webp",
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
@@ -170,7 +178,7 @@ const TechStack = () => {
 
   return (
     <div className="techstack">
-      <h2> My DevOps Arsenal</h2>
+      <h2> My SysAdmin &amp; Security Arsenal</h2>
 
       <Canvas
         shadows
